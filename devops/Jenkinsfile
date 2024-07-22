@@ -2,26 +2,21 @@ pipeline {
     agent any 
     environment { 
         INSTAGRAM_NERIO = '@Nerio' 
-    } 
+    }
+    tools {
+        maven 'Maven'
+    }
 
-    stages { 
-        stage('Greeting') { 
-            steps { 
-                echo 'Hello world' 
-            } 
-        } 
-        stage("Print environment variables") { 
-            steps { 
-                sh "echo ${env.INSTAGRAM_NERIO}"  
-                sh "echo ${INSTAGRAM_NERIO}" 
-            } 
-        } 
-
-        stage("Print system environment variables") { 
-            steps { 
-                sh "echo ${env.INSTAGRAM}"  
-                sh "echo ${INSTAGRAM}" 
-            } 
-        } 
+    stages {
+        stage('check env') {
+            steps {
+                sh "mvn -v"
+            }
+        }
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
     } 
 } 
