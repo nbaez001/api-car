@@ -4,7 +4,7 @@ pipeline {
         INSTAGRAM_NERIO = '@Nerio' 
     }
     tools {
-        maven 'Maven'
+
     }
     options {
         skipDefaultCheckout(true)
