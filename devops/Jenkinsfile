@@ -4,6 +4,7 @@ pipeline {
         INSTAGRAM_NERIO = '@Nerio' 
     }
     tools {
+        jdk 'Java17'
         maven 'Maven'
     }
     options {
@@ -14,6 +15,7 @@ pipeline {
         stage('check env') {
             steps {
                 sh "mvn -v"
+                sh "java -version"
             }
         }
         stage('Checkout') {
