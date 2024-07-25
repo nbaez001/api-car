@@ -28,7 +28,7 @@ pipeline {
                 script {
                     def version = sh(script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true).trim()
                     env.APP_VERSION = version
-                    sh ${APP_VERSION}
+                    sh "echo ${env.APP_VERSION}"
                 }
             }
         }
