@@ -19,6 +19,25 @@
         <java.version>17</java.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>maven-centra</id>
+            <url>http://192.168.1.102:8082/artifactory/maven-central/</url>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>nexus-reniec</id>
+            <name>nexus-reniec-release</name>
+            <url>http://192.168.1.102:8082/repository/reniec-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-reniec</id>
+            <name>nexus-reniec-snapshot</name>
+            <url>http://192.168.1.102:8082/repository/reniec-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

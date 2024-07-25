@@ -23,5 +23,24 @@ pipeline {
                 checkout scm
             }
         }
+
+
+        stage('Test') {
+            steps {
+                configFileProvider([configFile(fileId: 'vehicle-maven-nexus-settings', variable: 'MAVEN_SETTINGS')]) {
+                    sh 'mvn -s $MAVEN_SETTINGS test --batch-mode'
+                }
+            }
+        }
+
+        stage('Extract Version') {
+            steps {
+                script {
+                    def version = sh(script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true).trim()
+                    env.APP_VERSION = version
+                    sh ${APP_VERSION}
+                }
+            }
+        }
     } 
 } 
