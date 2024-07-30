@@ -21,20 +21,20 @@
 
     <repositories>
         <repository>
-            <id>maven-centra</id>
-            <url>http://192.168.1.102:8082/artifactory/maven-central/</url>
+            <id>vehicle-libs-release</id>
+            <url>http://192.168.1.102:8082/artifactory/vehicle-libs-release/</url>
         </repository>
     </repositories>
     <distributionManagement>
         <repository>
-            <id>nexus-reniec</id>
-            <name>nexus-reniec-release</name>
-            <url>http://192.168.1.102:8082/repository/reniec-release/</url>
+            <id>vehicle-libs-release-local</id>
+            <name>artifactory-vehicle-libs-release-local</name>
+            <url>http://192.168.1.102:8082/artifactory/vehicle-libs-release-local/</url>
         </repository>
         <snapshotRepository>
-            <id>nexus-reniec</id>
-            <name>nexus-reniec-snapshot</name>
-            <url>http://192.168.1.102:8082/repository/reniec-snapshot/</url>
+            <id>vehicle-libs-snapshot-local</id>
+            <name>artifactory-vehicle-libs-snapshot-local</name>
+            <url>http://192.168.1.102:8082/artifactory/vehicle-libs-snapshot-local/</url>
         </snapshotRepository>
     </distributionManagement>
 
