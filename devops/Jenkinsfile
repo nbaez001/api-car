@@ -36,8 +36,31 @@ pipeline {
         stage('Test') {
             steps {
                 configFileProvider([configFile(fileId: 'vehicle-maven-artifactory-settings', variable: 'MAVEN_SETTINGS')]) {
-                    sh 'cat $MAVEN_SETTINGS'
                     sh 'mvn -s $MAVEN_SETTINGS test --batch-mode'
+                }
+            }
+        }
+
+        stage('Package') {
+            steps {
+                configFileProvider([configFile(fileId: 'vehicle-maven-artifactory-settings', variable: 'MAVEN_SETTINGS')]) {
+                    sh 'mvn -s $MAVEN_SETTINGS package --batch-mode'
+                }
+            }
+        }
+
+        stage('Verify') {
+            steps {
+                configFileProvider([configFile(fileId: 'vehicle-maven-artifactory-settings', variable: 'MAVEN_SETTINGS')]) {
+                    sh 'mvn -s $MAVEN_SETTINGS verify --batch-mode'
+                }
+            }
+        }
+
+        stage('Install') {
+            steps {
+                configFileProvider([configFile(fileId: 'vehicle-maven-artifactory-settings', variable: 'MAVEN_SETTINGS')]) {
+                    sh 'mvn -s $MAVEN_SETTINGS install --batch-mode'
                 }
             }
         }
