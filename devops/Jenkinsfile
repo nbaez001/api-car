@@ -71,5 +71,19 @@ pipeline {
                     junit '**/target/surefire-reports/TEST-*.xml'
             }
         }
+
+        stage ('Artifact') {
+            steps {
+                step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
+            }
+        }
+
+        stage('Deploy Jar - Nexus') {
+            steps {
+                configFileProvider([configFile(fileId: 'vehicle-maven-artifactory-settings', variable: 'MAVEN_SETTINGS')]) {
+                    sh 'mvn -s $MAVEN_SETTINGS package deploy --batch-mode'
+                }
+            }
+        }
     }
 }
