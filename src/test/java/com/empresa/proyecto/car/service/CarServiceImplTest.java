@@ -13,10 +13,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.time.Duration;
-
 @ExtendWith(MockitoExtension.class)
-public class CarServiceImplTest {
+class CarServiceImplTest {
 
     @Mock
     private CarRepository carRepository;
