@@ -78,6 +78,31 @@ pipeline {
             }
         }
 
+        stage('Sonar-scanner Analysis') {
+            steps{
+                script{
+                    def sonarqubeScannerHome = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    withSonarQubeEnv('sonarqube-server')
+                    {
+                        configFileProvider([configFile(fileId: 'reniec-maven-nexus-settings', variable: 'MAVEN_SETTINGS')]) {
+                            sh "mvn -s $MAVEN_SETTINGS sonar:sonar -Pcoverage \
+                            -Dsonar.host.url=${SONAR_HOST_URL} \
+                            -Dsonar.login=${SONAR_AUTH_TOKEN} \
+                            -Dsonar.projectName=${JOB_BASE_NAME}:${CLUSTER} \
+                            -Dsonar.projectKey=${JOB_BASE_NAME}:${CLUSTER} \
+                            -Dsonar.sources=src/main/java \
+                            -Dsonar.java.libraries=target/ \
+                            -Dsonar.java.binaries=target/classes \
+                            -Dsonar.language=java \
+                            -Dsonar.qualitygate.wait=true \
+                            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+                            --batch-mode"
+                        }
+                    }
+                }
+            }
+        }
+
         stage('Deploy Jar - Nexus') {
             steps {
                 configFileProvider([configFile(fileId: 'vehicle-maven-artifactory-settings', variable: 'MAVEN_SETTINGS')]) {
