@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.empresa.proyecto</groupId>
     <artifactId>api-car</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>api-car</name>
     <description>Api card</description>
 
@@ -17,6 +17,15 @@
 
     <properties>
         <java.version>17</java.version>
+        <start-class>com.empresa.proyecto.car.ApiCarApplication</start-class>
+        <sonar.coverage.exclusions>
+            **/car/configuration/*.java,
+            **/car/controller/*.java,
+            **/car/model/*.java,
+            **/car/repository/*.java,
+            **/car/routes/*.java,
+            **/car/ApiCarApplication.java
+        </sonar.coverage.exclusions>
     </properties>
 
     <repositories>
