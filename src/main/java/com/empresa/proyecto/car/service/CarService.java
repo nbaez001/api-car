@@ -16,7 +16,7 @@ public interface CarService {
 
 	public Mono<Car> update(Car car);
 
-	public Flux<Car> findAll(Sort sort);
+	public Flux<Car> findAll();
 	
 	public Flux<Integer> listNumbers();
 }

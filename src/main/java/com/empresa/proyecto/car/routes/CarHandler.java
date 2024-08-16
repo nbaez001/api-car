@@ -24,8 +24,8 @@ public class CarHandler {
 	@Autowired
 	private CarService service;
 
-	public Mono<ServerResponse> getAll(ServerRequest req) {
-		var all = service.findAll(Sort.by("model", "brand"));
+	public Mono<ServerResponse> getAll() {
+		var all = service.findAll();
 		return ServerResponse.ok().contentType(MediaType.TEXT_EVENT_STREAM)
 				.body(BodyInserters.fromPublisher(all, Car.class));
 	}
@@ -55,7 +55,7 @@ public class CarHandler {
 		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(service.deleteById(id), Void.class);
 	}
 	
-	public Mono<ServerResponse> getListNumbers(ServerRequest req) {
+	public Mono<ServerResponse> getListNumbers() {
 		var all = service.listNumbers();
 		return ServerResponse.ok().contentType(MediaType.TEXT_EVENT_STREAM)
 				.body(BodyInserters.fromPublisher(all, Integer.class));

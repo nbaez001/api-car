@@ -29,7 +29,7 @@ public class CarController {
 
 	@GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Flux<Car> getAll() {
-		return carService.findAll(Sort.by("model", "brand"));
+		return carService.findAll();
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -72,12 +72,6 @@ pipeline {
             }
         }
 
-        stage ('Artifact') {
-            steps {
-                step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
-            }
-        }
-
         stage('Sonar-scanner Analysis') {
             steps{
                 script{
@@ -99,6 +93,12 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+
+        stage ('Artifact') {
+            steps {
+                step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
             }
         }
 

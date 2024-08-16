@@ -35,8 +35,8 @@ public class CarServiceImpl implements CarService {
 		return carRepository.save(car);
 	}
 
-	public Flux<Car> findAll(Sort sort) {
-		return carRepository.findAll().delaySequence(Duration.ofSeconds(3));
+	public Flux<Car> findAll() {
+		return carRepository.findAll();
 	}
 
 	public Flux<Integer> listNumbers() {

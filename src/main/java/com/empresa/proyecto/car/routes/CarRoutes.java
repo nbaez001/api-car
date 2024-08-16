@@ -14,11 +14,11 @@ public class CarRoutes {
 
     @Bean
     public RouterFunction<ServerResponse> routes(CarHandler handler) {
-        return RouterFunctions.route(GET("/car").and(accept(MediaType.TEXT_EVENT_STREAM)), handler::getAll)
+        return RouterFunctions.route(GET("/car").and(accept(MediaType.TEXT_EVENT_STREAM)), req -> handler.getAll())
                 .andRoute(GET("/car/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::getOne)
                 .andRoute(POST("/car").and(accept(MediaType.APPLICATION_JSON)), handler::save)
                 .andRoute(PUT("/car").and(accept(MediaType.APPLICATION_JSON)), handler::save)
                 .andRoute(DELETE("/car/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::deleteById)
-                .andRoute(GET("/car/numbers/valor").and(accept(MediaType.TEXT_EVENT_STREAM)), handler::getListNumbers);
+                .andRoute(GET("/car/numbers/valor").and(accept(MediaType.TEXT_EVENT_STREAM)), req -> handler.getListNumbers());
     }
 }
