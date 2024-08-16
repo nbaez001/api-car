@@ -82,9 +82,9 @@ pipeline {
             steps{
                 script{
                     def sonarqubeScannerHome = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    withSonarQubeEnv('sonarqube-server')
+                    withSonarQubeEnv('sonarqube-10.6')
                     {
-                        configFileProvider([configFile(fileId: 'reniec-maven-nexus-settings', variable: 'MAVEN_SETTINGS')]) {
+                        configFileProvider([configFile(fileId: 'vehicle-maven-artifactory-settings', variable: 'MAVEN_SETTINGS')]) {
                             sh "mvn -s $MAVEN_SETTINGS sonar:sonar -Pcoverage \
                             -Dsonar.host.url=${SONAR_HOST_URL} \
                             -Dsonar.login=${SONAR_AUTH_TOKEN} \
